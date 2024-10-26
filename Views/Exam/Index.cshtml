@@ -1,7 +1,7 @@
-﻿@model List<ExamPrograme.Models.ViewModel.StudentViewModel?>
+﻿@model List<ExamPrograme.Models.ViewModel.ExamViewModel>
 
 @{
-    ViewData["Title"] = "Şagirdlərin Siyahısı";
+    ViewData["Title"] = "İmtahan Cədvəli";
 }
 
 <div class="container mt-5">
@@ -10,36 +10,35 @@
             <h2 class="text-center">@ViewData["Title"]</h2>
 
             <div class="text-end mb-3">
-                <a asp-action="AddStudent" class="btn btn-success">+ Yeni Şagird Əlavə Et</a>
+                <a asp-action="AddExam" class="btn btn-success">+ Yeni İmtahan Əlavə Et</a>
             </div>
 
             <table class="table table-bordered table-hover align-middle text-center">
                 <thead class="table-dark">
                     <tr>
-                        <th>Id</th>
-                        <th>Ad</th>
-                        <th>Soyad</th>
-                        <th>Sinifi</th>
+                        <th>Dərs Kodu</th>
+                        <th>Şagird Nömrəsi</th>
+                        <th>İmtahan Tarixi</th>
+                        <th>Qiymət</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (Model != null && Model.Count > 0)
                     {
-                        foreach (var student in Model)
+                        foreach (var exam in Model)
                         {
                             <tr>
-                                <td>@student?.Id</td>
-                                <td>@student?.FirstName</td>
-                                <td>@student?.LastName</td>
-                                <td>@student?.ClassLevel</td>
-                             
+                                <td>@exam.LessonCode</td>
+                                <td>@exam.StudentId</td>
+                                <td>@exam.ExamDate.ToString("yyyy-MM-dd")</td>
+                                <td>@(exam.Grade.HasValue ? exam.Grade.ToString() : "N/A")</td>
                             </tr>
                         }
                     }
                     else
                     {
                         <tr>
-                            <td colspan="5" class="text-center text-muted">Heç bir şagird tapılmadı.</td>
+                            <td colspan="4" class="text-center text-muted">Heç bir imtahan tapılmadı.</td>
                         </tr>
                     }
                 </tbody>

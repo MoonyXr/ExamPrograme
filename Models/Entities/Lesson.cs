@@ -5,7 +5,7 @@ namespace ExamPrograme.Models.Entities;
 
 public partial class Lesson
 {
-    public string Code { get; set; } = null!;
+    public short Code { get; set; }
 
     public string Name { get; set; } = null!;
 

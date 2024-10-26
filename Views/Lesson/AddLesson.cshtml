@@ -1,0 +1,34 @@
+﻿@model ExamPrograme.Models.ViewModel.LessonViewModel
+
+@{
+    ViewData["Title"] = "Yeni Dərs Əlavə Et";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="AddLesson" method="post">
+  
+
+    <div class="form-group">
+        <label for="Name">Dərs Adı</label>
+        <input type="text" class="form-control" id="Name" name="Name" required />
+    </div>
+
+    <div class="form-group">
+        <label for="ClassLevel">Sinif</label>
+        <input type="number" class="form-control" id="ClassLevel" name="ClassLevel" />
+    </div>
+
+    <div class="form-group">
+        <label for="TeacherFirstName">Müəllimin Adı</label>
+        <input type="text" class="form-control" id="TeacherFirstName" name="TeacherFirstName" required />
+    </div>
+
+    <div class="form-group">
+        <label for="TeacherLastName">Müəllimin Soyadı</label>
+        <input type="text" class="form-control" id="TeacherLastName" name="TeacherLastName" required />
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Əlavə et</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Geri</a>
+</form>

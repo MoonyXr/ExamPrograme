@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ExamPrograme.Models.ViewModel.LessonViewModel>
+
+@{
+    ViewData["Title"] = "Dərs Cədvəli";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">@ViewData["Title"]</h2>
+
+            <div class="text-end mb-3">
+                <a asp-action="AddLesson" class="btn btn-success">+ Yeni Dərs Əlavə Et</a>
+            </div>
+
+            <table class="table table-bordered table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Kod</th>
+                        <th>Ad</th>
+                        <th>Sinif</th>
+                        <th>Müəllim</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var lesson in Model)
+                        {
+                            <tr>
+                                <td>@lesson.Code</td>
+                                <td>@lesson.Name</td>
+                                <td>
+                                    @if (lesson.ClassLevel.HasValue)
+                                    {
+                                        @lesson.ClassLevel
+                                    }
+                                    else
+                                    {
+                                        <span>Yoxdur</span>
+                                    }
+                                </td>
+                                <td>@lesson.TeacherFullName</td>
+                               
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">Heç bir dərs tapılmadı.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

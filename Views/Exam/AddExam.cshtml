@@ -1,0 +1,32 @@
+﻿@model ExamPrograme.Models.ViewModel.ExamViewModel
+
+@{
+    ViewData["Title"] = "Yeni İmtahan Qeydiyyatı";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="AddExam" method="post">
+    <div class="form-group">
+        <label for="LessonCode">Dərs Kodu</label>
+        <input type="text" class="form-control" id="LessonCode" name="LessonCode" maxlength="3" required />
+    </div>
+
+    <div class="form-group">
+        <label for="StudentId">Şagirdin Nömrəsi</label>
+        <input type="number" class="form-control" id="StudentId" name="StudentId" min="0" max="99999" required />
+    </div>
+
+    <div class="form-group">
+        <label for="ExamDate">İmtahan Tarixi</label>
+        <input type="date" class="form-control" id="ExamDate" name="ExamDate" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Grade">Qiymət</label>
+        <input type="number" class="form-control" id="Grade" name="Grade" min="0" max="5" />
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Əlavə et</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Geri</a>
+</form>

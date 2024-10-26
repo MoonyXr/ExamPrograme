@@ -1,4 +1,5 @@
 ﻿using ExamPrograme.Models.Entities;
+using ExamPrograme.Models.ViewModel;
 using ExamPrograme.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,24 +17,26 @@ namespace ExamPrograme.Controllers
         public async Task<IActionResult> Index()
         {
             var exams = await _examService.GetAllEntitiesAsync();
-            return View(exams);
+            var examViewModels = MapperService.ToViewModelList(exams); 
+            return View(examViewModels);
         }
 
-        public IActionResult Create()
+        public IActionResult AddExam()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Exam exam)
+        public async Task<IActionResult> AddExam(ExamViewModel examViewModel)
         {
             if (ModelState.IsValid)
             {
-                await _examService.AddEntityAsync(exam);
-                return RedirectToAction(nameof(Index)); 
+                var entityExam = MapperService.ToEntity(examViewModel);
+                await _examService.AddEntityAsync(entityExam);
+                return RedirectToAction(nameof(Index));
             }
-            return View(exam);
+            return View(examViewModel);
         }
     }
 }

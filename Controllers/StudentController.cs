@@ -16,17 +16,19 @@ namespace ExamPrograme.Controllers
         public async Task<IActionResult> Index()
         {
             var students = await _studentService.GetAllEntitiesAsync();
-            return View(students);
+            var studentViewModels = MapperService.MapToViewModels(students);
+
+            return View(studentViewModels);
         }
 
-        public IActionResult Create()
+        public IActionResult AddStudent()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Student student)
+        public async Task<IActionResult> AddStudent(Student student)
         {
             if (ModelState.IsValid)
             {

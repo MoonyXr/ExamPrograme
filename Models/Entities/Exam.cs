@@ -7,7 +7,7 @@ public partial class Exam
 {
     public int Id { get; set; }
 
-    public string LessonCode { get; set; } = null!;
+    public short LessonCode { get; set; }
 
     public int StudentId { get; set; }
 

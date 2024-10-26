@@ -24,18 +24,13 @@ public partial class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=StudentExam;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=StudentAndExam;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Exam>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Exams__3214EC07243AC2D4");
-
-            entity.Property(e => e.LessonCode)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.HasKey(e => e.Id).HasName("PK__Exams__3214EC07995F97ED");
 
             entity.HasOne(d => d.LessonCodeNavigation).WithMany(p => p.Exams)
                 .HasForeignKey(d => d.LessonCode)
@@ -50,12 +45,8 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<Lesson>(entity =>
         {
-            entity.HasKey(e => e.Code).HasName("PK__Lessons__A25C5AA614F9D113");
+            entity.HasKey(e => e.Code).HasName("PK__Lessons__A25C5AA6A1B79FF3");
 
-            entity.Property(e => e.Code)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .IsFixedLength();
             entity.Property(e => e.Name)
                 .HasMaxLength(30)
                 .IsUnicode(false);
@@ -69,9 +60,8 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Students__3214EC07F1479560");
+            entity.HasKey(e => e.Id).HasName("PK__Students__3214EC079A1F4C49");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.FirstName)
                 .HasMaxLength(30)
                 .IsUnicode(false);

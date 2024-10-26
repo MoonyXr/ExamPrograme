@@ -4,6 +4,7 @@
     {
         Task AddEntityAsync(T entity);
         Task<IEnumerable<T>> GetAllEntitiesAsync();
-        Task<T> GetEntityByIdAsync(int id);
+        Task<T> GetEntityByIdAsync(short id);
+        Task DeleteEntityAsync(short id);
     }
 }

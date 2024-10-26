@@ -1,6 +1,8 @@
 ﻿using ExamPrograme.Models.Entities;
+using ExamPrograme.Models.ViewModel;
 using ExamPrograme.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExamPrograme.Controllers
 {
@@ -16,17 +18,18 @@ namespace ExamPrograme.Controllers
         public async Task<IActionResult> Index()
         {
             var lessons = await _lessonService.GetAllEntitiesAsync();
-            return View(lessons);
+            var lessonViewModels = MapperService.ToViewModelList(lessons);
+            return View(lessonViewModels);
         }
 
-        public IActionResult Create()
+        public IActionResult AddLesson()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Lesson lesson)
+        public async Task<IActionResult> AddLesson(Lesson lesson)
         {
             if (ModelState.IsValid)
             {
@@ -35,5 +38,7 @@ namespace ExamPrograme.Controllers
             }
             return View(lesson);
         }
+
+
     }
 }

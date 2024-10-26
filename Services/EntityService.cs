@@ -21,9 +21,18 @@ namespace ExamPrograme.Services
             return await _repository.GetAllAsync();
         }
 
-        public async Task<T> GetEntityByIdAsync(int id)
+        public async Task<T> GetEntityByIdAsync(short id)
         {
             return await _repository.GetByIdAsync(id);
         }
+        public async Task DeleteEntityAsync(short id) 
+        {
+            var entity = await _repository.GetByIdAsync(id);
+            if (entity != null)
+            {
+                await _repository.DeleteAsync(entity); 
+            }
+        }
+        
     }
 }
